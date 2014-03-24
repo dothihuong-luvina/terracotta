@@ -27,13 +27,16 @@ echo "WITH JOB MANAGER"
 
         mv wiperdog/lib/java/bundle/org.wiperdog.jobmanager-0.2.1.jar wiperdog/lib/java/bundle/org.wiperdog.jobmanager-0.2.1.jar_bak
         # cp terracottaWithWiperdogUseJobManager/lib/java/bundle/org.wiperdog.jobmanager-0.2.1.jar wiperdog/lib/java/bundle/org.wiperdog.jobmanager-0.2.1.jar
-        git clone https://github.com/dothihuong-luvina/org.wiperdog.jobmanager
-        cd org.wiperdog.jobmanager
-        mvn install -DskipTests
-        cd $CUR_DIR
+	if [ ! -d org.wiperdog.jobmanager ];then 
+            git clone https://github.com/dothihuong-luvina/org.wiperdog.jobmanager
+        fi
+        if [ ! -f org.wiperdog.jobmanager/target/org.wiperdog.jobmanager-0.2.1.jar ];then 
+            cd org.wiperdog.jobmanager
+            mvn install -DskipTests
+            cd $CUR_DIR
+        fi
         cp org.wiperdog.jobmanager/target/org.wiperdog.jobmanager-0.2.1.jar wiperdog/lib/java/bundle/org.wiperdog.jobmanager-0.2.1.jar
         # cp terracottaWithWiperdogUseJobManager/lib/java/bundle/quartz-2.2.1.jar wiperdog/lib/java/bundle/quartz-2.2.1.jar
         cp quartz-2.2.1/target/quartz-2.2.1.jar wiperdog/lib/java/bundle/quartz-2.2.1.jar
         cp terracottaWithWiperdogUseJobManager/var/job/job1.job wiperdog/var/job/job1.job
         cp terracottaWithWiperdogUseJobManager/var/job/trigger.trg wiperdog/var/job/trigger.trg
-

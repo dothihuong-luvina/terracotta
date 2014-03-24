@@ -15,16 +15,29 @@ CUR_DIR=`cd "$dir/" && pwd`
 function installDefault
 (
     echo "You did not choose any option, would you like to install with default option?[y=accept/any key=exit]"
+    echo "[Default option: Install wiperdog with JobManager and Terracotta. Everything will be gotten from maven, svn or github if not exits]"
     read uchoice
     if [ -n $uchoice  ] && [ ! $uchoice == "y" ]
     then
         usage
         exit 0
     fi 
-    . ./getWiperdog.sh
+    
+    # Get wiperdog installer from maven
+    if [ ! -f wiperdog-assembly.jar ];then 
+        . ./getWiperdog.sh
+    fi
+    
+    # Install wiperdog
     . ./installWiperdog.sh
-    . ./configure.sh
+    
+    # Checkout Quartz from SVN and install if not exits
+    . ./checkoutAndInstallQuartz.sh
+    
+    # Config data (using JobManager bundle)
     . ./configureWithJobManager.sh
+    
+    # Run wiperdog
     . ./runWiperdog.sh
 )
 
@@ -73,7 +86,7 @@ while [ "$1" != "" ]; do
 done
 
 if [ ! -d quartz-2.2.1 ];then 
-  . ./checkoutQuartz.sh
+  . ./checkoutAndInstallQuartz.sh
 fi
 
 cd $CUR_DIR
@@ -85,12 +98,15 @@ fi
 
 # INSTALL WIPERDOG
 if [ $INSTALL_WIPERDOG = "TRUE" ]; then
+  if [ ! -d wiperdog ];then
+    rm wiperdog
+  fi
   . ./installWiperdog.sh
 fi
 
 # INSTALL WIPERDOG WITHOUT JOB MANAGER
 if [ $WITH_JOB_MANAGER = "FALSE" ]; then
-  . ./configure.sh
+  . ./configureWithoutJobManager.sh
 fi
 
 # INSTALL WIPERDOG WITH JOB MANAGER

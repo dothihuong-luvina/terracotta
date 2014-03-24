@@ -20,18 +20,18 @@
 	ソースは以下のものを含みます：
 		1. Demoを作成するScript:　startWiperdogWithTerracotta.sh/startWiperdogWithTerracotta.bat
 			このScriptの中に以下のことをやります：
-			    - Mavenからwiperdog installer取得する。
-			    - wiperdogをInstallする。
-			　　- QuartzとJobmanager bundleをReInstallする。
+			    - Mavenからwiperdog installer取得する。(getWiperdog.sh)
+			    - wiperdogをInstallする。(installWiperdog.sh)
+			　　- QuartzをReInstallする。(checkoutAndInstallQuartz.sh)
 				Quart：http://svn.terracotta.org/svn/quartz/tags/quartz-2.2.1/quartz/から取得して、
 					修正したpomファイル（terracottaWithWiperdog\quartz\pom.xml）を使って、もう一度Builtする
-				Jobmanager：https://github.com/dothihuong-luvina/org.wiperdog.jobmanagerから取得して、Builtする
 			    - Jobmanagerを使うか使わないかによって、変更ものをWiperdogに上書きます（Bundleと必要なファイル）
-				Jobmanagerを使う：
+				Jobmanagerを使う：(configureWithJobManager.sh)
 					ReInstallしたQuart
+  					    https://github.com/dothihuong-luvina/org.wiperdog.jobmanagerから取得して、Builtする
 					新しいBuiltしたJobmanager
 					terracottaWithWiperdog\terracottaWithWiperdogUseJobManagerのソース
-				JobManagerを使わない：
+				JobManagerを使わない：(configureWithoutJobManager.sh)
 					ReInstallしたQuart
 					terracottaWithWiperdog\terracottaWithWiperdogUseJobManagerのソース
 		2. Others:
