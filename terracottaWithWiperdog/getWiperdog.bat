@@ -1,5 +1,4 @@
 @echo off 
-cls
 set errorLevel=0
 call mvn -v || set errorLevel=1
 if %errorLevel% == 1 (
@@ -7,7 +6,7 @@ if %errorLevel% == 1 (
   EXIT /B 1
 )
 
-::SET CUR_DIR="%~dp0"
+REM SET CUR_DIR="%~dp0"
 SET CUR_DIR="%CD%"
 
 echo Current directory %CUR_DIR%

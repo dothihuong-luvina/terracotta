@@ -60,4 +60,12 @@
 	    
 	*** Note: When run wiperdog with terracotta, all object which need to run job will be cached.     
           So, if you run wiperdog with jobmanager, and then,     
-             you want run using groovy source, without jobmanager, you need restart terracotta server.
+             you want run using groovy source, without jobmanager, you need restart terracotta server.  
+  
+5. Test behavior of Wiperdog with Terracotta  
+	5.1. Include TestWiperdogAndTerracottaProduce.sh, TestWiperdogAndTerracottaCases.sh, TestWiperdogAndTerracottaCreateREADME.sh  
+	5.2. These scripts will generate 3 folder of each case test (case1, case2, case3)  
+	5.3. Usage :   
+		./TestWiperdogAndTerracottaProduce.sh <cases>  
+		For short : ./TestWiperdogAndTerracottaProduce.sh case1 case2 case3  
+	5.4. For usage for each case, refer to README in each case folder.  
