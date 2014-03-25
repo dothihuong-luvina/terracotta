@@ -3,22 +3,32 @@ cls
 SET CUR_DIR=%CD%
 
 :installDefault
+    echo [Default option: Install wiperdog with JobManager and Terracotta. Everything will be gotten from maven, svn or github if not exits]
     SET uchoice=
     SET /P uchoice=You did not specify any option, would you like to install with default option[Yy(default)/Other key to exit]?
     if "%uchoice%" == "" goto:eof
     if not "%uchoice%" == "y" (
-        echo NOT y
         if not "%uchoice%" == "Y" (
-            echo NOT Y
             goto:eof
         )
     )    
     pause
-    call:usage        
-    call %CUR_DIR%\getWiperdog.bat
-    call %CUR_DIR%\installWiperdog.bat
-    call %CUR_DIR%\configure.bat
-    call %CUR_DIR%\configureWithJobManager.bat
+    call:usage
+    @rem Get wiperdog installer from maven
+    if not exist wiperdog-assembly.jar ( 
+        call %CUR_DIR%\getWiperdog.bat || GOTO HANDLE_FAIL
+    )
+    
+    @rem Install wiperdog
+    call %CUR_DIR%\installWiperdog.bat || GOTO HANDLE_FAIL
+    
+    @rem Checkout Quartz from SVN and install if not exits
+    call %CUR_DIR%\checkoutAndInstallQuartz.bat || GOTO HANDLE_FAIL
+    
+    @rem Config data (using JobManager bundle)
+    call %CUR_DIR%\configureWithJobManager.bat || GOTO HANDLE_FAIL
+    
+    @rem Run wiperdog
     call %CUR_DIR%\runWiperdog.bat
 goto:eof
 
@@ -67,32 +77,33 @@ for %%x in (%*) do (
 )
 
 if not exist quartz-2.2.1 (
-  call %CUR_DIR%\checkoutQuartz.bat
+  call %CUR_DIR%\checkoutQuartz.bat || GOTO HANDLE_FAIL
 )
 
 cd %CUR_DIR%
 
 # GET WIPERDOG FROM MAVEN BY mvn COMMAND
 if "%GET_WIPERDOG%" == "TRUE" (
-  call %CUR_DIR%\getWiperdog.bat
+  call %CUR_DIR%\getWiperdog.bat || GOTO HANDLE_FAIL
 )
 
 # INSTALL WIPERDOG
 if "%INSTALL_WIPERDOG%" == "TRUE" (
-  call %CUR_DIR%\installWiperdog.bat
+  call %CUR_DIR%\installWiperdog.bat || GOTO HANDLE_FAIL
 )
 
 # INSTALL WIPERDOG WITHOUT JOB MANAGER
 if "%WITH_JOB_MANAGER%" == "FALSE" (
-  call %CUR_DIR%\configure.bat
+  call %CUR_DIR%\configureWithoutJobManager.bat || GOTO HANDLE_FAIL
 )
 
 # INSTALL WIPERDOG WITH JOB MANAGER
 if "%WITH_JOB_MANAGER%" = "TRUE" (
-  %CUR_DIR%\configureWithJobManager.bat
+  call %CUR_DIR%\configureWithJobManager.bat || GOTO HANDLE_FAIL
 )
 
 # START WIPERDOG
 if "%RUN_WIPERDOG%" = "TRUE" (
-	%CUR_DIR%\runWiperdog.bat
+  call %CUR_DIR%\runWiperdog.bat
 )
+:HANDLE_FAIL
