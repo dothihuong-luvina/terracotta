@@ -1,0 +1,11 @@
+log4j:log4j:1.2.16,..\lib
+org.slf4j:slf4j-api:1.6.2,..\lib
+org.slf4j:slf4j-log4j12:1.6.2,..\lib
+org.apache.xmlbeans:xmlbeans:2.4.0,..\lib
+org.terracotta:terracotta-l1:4.1.1,..\lib,http://www.terracotta.org/download/reflector/releases
+org.quartz-scheduler:quartz:2.2.1,..\lib,http://www.terracotta.org/download/reflector/releases
+org.terracotta.toolkit:terracotta-toolkit-api:2.5,..\lib,http://www.terracotta.org/download/reflector/releases
+org.terracotta.toolkit:terracotta-toolkit-api-internal:1.12,..\lib,http://www.terracotta.org/download/reflector/releases
+org.terracotta.internal:terracotta-toolkit-impl:4.1.1,..\lib,http://www.terracotta.org/download/reflector/releases
+org.terracotta:terracotta-toolkit-runtime:4.1.1,..\lib,http://www.terracotta.org/download/reflector/releases
+org.terracotta.internal:toolkit-express-impl:4.1.1,..\lib,http://www.terracotta.org/download/reflector/releases
