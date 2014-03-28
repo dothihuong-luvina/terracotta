@@ -18,3 +18,5 @@ org.ops4j.pax.swissbox:pax-swissbox-bnd:1.7.0,/../lib/java/bundle.a
 org.ops4j.pax.swissbox:pax-swissbox-property:1.7.0,/../lib/java/bundle.a
 org.ops4j.pax.url:pax-url-commons:1.6.0,/../lib/java/bundle.a
 org.ops4j.pax.url:pax-url-wrap:1.6.0,/../lib/java/bundle.a
+org.apache.directory.studio:org.apache.commons.collections:3.2.1,/../lib/java/bundle.a
+xml-resolver:xml-resolver:1.2,/../lib/java/bundle.wrap

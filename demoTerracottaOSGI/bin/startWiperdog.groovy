@@ -69,6 +69,7 @@ public class WiperDogBoot{
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/org.apache.felix.shell-1.4.2.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/org.apache.felix.shell.tui-1.4.1.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/org.apache.felix.configadmin-1.8.0.jar")).toURI().toString())
+			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/org.apache.commons.collections-3.2.1.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/groovy-all-2.2.1.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/bndlib-2.1.0.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle.a/ops4j-base-lang-1.4.0.jar")).toURI().toString())
@@ -87,7 +88,8 @@ public class WiperDogBoot{
 				bund.start()
 			}
 			
-			context.installBundle("wrap:" + (new File(felix_home + "/" + "lib/java/bundle.wrap/c3p0-0.9.1.2.jar")).toURI().toString())
+			context.installBundle("wrap:" + (new File(felix_home + "/" + "lib/java/bundle.wrap/c3p0-0.9.2.jar")).toURI().toString())
+			context.installBundle("wrap:" + (new File(felix_home + "/" + "lib/java/bundle.wrap/xml-resolver-1.2.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle/quartz-2.2.1.jar")).toURI().toString())
 			context.installBundle((new File(felix_home + "/" + "lib/java/bundle/terracottaInMavenBundle-1.0.jar")).toURI().toString())
 			lstinstalledBundles = context.getBundles()
