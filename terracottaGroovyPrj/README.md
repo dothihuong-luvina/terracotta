@@ -15,7 +15,7 @@
 		SVNからterracotta取得したFolder/deployで以下のCommandでTerracottaサーバを起動できます。    
 			maven exec:exec -P start-server    
 			(停止する時、maven exec:exec -P stop-serverを使います)    
-
+	LibのBundleのために/install/listBundle.txtを変更して、processBundleのScriptを実行しなければなりません。
 3. ソースコードと実行：    
 	ソースコードは以下のものを含みます：    
 		/lib：Library jar (ほとんどTerraCottaのLibrary)    
