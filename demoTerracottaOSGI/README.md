@@ -15,6 +15,7 @@
 		マージしたものはdemoTerracottaOSGI\lib\java\bundle\quartz-new-merge.txtを参照してください。    
 		必要なLibraryはTerraCottaOpenソースをBuiltした後、Local repositoryから取得できます。    
 		（一時、必要なLibraryをExtractして、後、全部JarファイルとしてZipします）    
+	LibのBundleのために/install/listBundle.txtを変更して、processBundleのScriptを実行しなければなりません。
 3. 実行：    
 	Wiperdogの環境を簡単にして、このOSGI環境を作成しました。    
 	demoTerracottaOSGI\binの中に、startWiperdog.sh/startWiperdog.batを実行してください。    
