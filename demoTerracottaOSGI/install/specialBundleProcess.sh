@@ -5,17 +5,17 @@ echo $CUR_DIR
 echo "I will proceed special request for Quartz and terracotta bundle"
 cd demoTerracottaBundle
 eval "mvn clean install"
-
-if [ ! -d $CUR_DIR/lib/java/bundle ]
+DESTINATION=$CUR_DIR/../lib/java/bundle
+if [ ! -d $DESTINATION ]
 then
-	mkdir $CUR_DIR/lib/java/bundle
+	mkdir $DESTINATION
 fi
-cp target/terracottaInMavenBundle-1.0.jar $CUR_DIR/lib/java/bundle/terracottaInMavenBundle-1.0.jar
+cp target/terracottaInMavenBundle-1.0.jar $DESTINATION/terracottaInMavenBundle-1.0.jar
 
 cd $CUR_DIR
 if [ ! -d quartz-2.2.1 ]
 then
 	./checkoutAndInstallQuartz.sh
 fi
-cp quartz-2.2.1/target/quartz-2.2.1.jar $CUR_DIR/lib/java/bundle/quartz-2.2.1.jar
+cp quartz-2.2.1/target/quartz-2.2.1.jar $DESTINATION/quartz-2.2.1.jar
 

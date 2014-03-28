@@ -39,5 +39,5 @@ do
 		fi
 		./getBundle.sh ${ADDR[0]} $DESTINATION/ ${ADDR[2]}
 	done <<< $line
-done < listBundle.txt
+done < listBundle
 
