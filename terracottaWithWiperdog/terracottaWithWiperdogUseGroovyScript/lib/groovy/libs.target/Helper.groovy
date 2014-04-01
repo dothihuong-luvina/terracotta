@@ -216,7 +216,9 @@ class Helper {
 		def jobClass = shell.getClassLoader().loadClass("CustomJob")
 		JobDetail job = JobBuilder.newJob(jobClass).withIdentity(jobProp["JOB"].name).storeDurably(true).build()
 		// JobDetail job = JobBuilder.newJob(CustomJob.class).withIdentity(jobProp["JOB"]).storeDurably(true).build()
-		sched.addJob(job, true);
+		if(!sched.checkExists(job.getKey())){
+			sched.addJob(job, true);
+		}
 		if(listOrphaneTrg != null && listOrphaneTrg.size() > 0){
 			// println "---Process waitting trg"
 			def listTrgDel = []
@@ -225,8 +227,8 @@ class Helper {
 				def jobKey = new JobKey(trig.getKey().getName())
 				if(sched.checkExists(jobKey)){
 					sched.scheduleJob(trig)
+					listTrgDel.add(trg)
 				}
-				listTrgDel.add(trg)
 			}
 			listOrphaneTrg.removeAll(listTrgDel)
 		}
@@ -236,8 +238,8 @@ class Helper {
 	def processTrigger(file){
 		Thread.currentThread().contextClassLoader = shell.getClassLoader()
 		// println "--process trigger file"
-		def trigger
 		file.eachLine{line->
+			def trigger
 			def oTrg = shell.evaluate("[" + line + "]")
 			// println "---" + oTrg
 			if(oTrg != null && oTrg.job != null && oTrg.schedule != null){
@@ -261,10 +263,8 @@ class Helper {
 			}
 			if(trigger != null){
 				if(!sched.checkExists(trigger.getKey())){
-					// println "---Trigger doesn't exist"
 					sched.scheduleJob(trigger)
 				}else{
-					// println "---Trigger exists"
 					sched.unscheduleJob(trigger.getKey())
 					sched.scheduleJob(trigger)
 				}
