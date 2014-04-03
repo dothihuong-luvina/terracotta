@@ -172,7 +172,9 @@ class GroovyScheduledJob implements JobExecutable,Serializable {
 	 * @return
 	 */
 	Object execute(JobDataMap params) throws InterruptedException {
-		def jobfile = new	File(this.fullPathOfFile)
+		properties = MonitorJobConfigLoader.getProperties()
+		def jobfileName = (new File(this.fullPathOfFile)).getName()
+		def jobfile = new File(properties.get(ResourceConstants.JOB_DIRECTORY) + "/" + jobfileName)
 		def loader = Thread.currentThread().contextClassLoader
 		loader.clearCache()
 		this.classOfJob = loader.parseClass(jobfile)

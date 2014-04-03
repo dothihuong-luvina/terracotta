@@ -37,7 +37,8 @@ class MonitorJobConfigLoader implements Serializable{
 		if(this.properties == null){
 			this.properties = setDefault()
 		}
-		return this.properties;
+		def prop = this.properties.internalMap
+		return prop;
 	}
 	
 	/**
