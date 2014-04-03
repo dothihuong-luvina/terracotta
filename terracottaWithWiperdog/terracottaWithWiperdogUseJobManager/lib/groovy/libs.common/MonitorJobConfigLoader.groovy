@@ -7,8 +7,7 @@ import org.osgi.framework.ServiceReference
  * get config information
  *
  */
-class MonitorJobConfigLoader implements Serializable{
-	private static final long serialVersionUID = 7526472295622776147L;
+class MonitorJobConfigLoader{
 
 	static Dictionary properties
 	/**
