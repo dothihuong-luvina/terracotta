@@ -7,19 +7,18 @@ import org.osgi.framework.ServiceReference
  * get config information
  *
  */
-class MonitorJobConfigLoader implements Serializable{
-	private static final long serialVersionUID = 7526472295622776147L;
+class MonitorJobConfigLoader{
 
 	static Dictionary properties
 	/**
 	 * constructor
 	 */
 	public MonitorJobConfigLoader(BundleContext context) {
-		/*ServiceReference caRef = context.getServiceReference(ConfigurationAdmin.class.getName())
+		ServiceReference caRef = context.getServiceReference(ConfigurationAdmin.class.getName())
 		def configAdmin = context.getService(caRef)
 		def config = configAdmin.getConfiguration(ResourceConstants.SERVICE_PID)
-		Dictionary props = config.getProperties()*/
-		Dictionary props
+		Dictionary props = config.getProperties()
+		//Dictionary props
 		if (props != null) {
 			this.properties = props
 		} else {
@@ -37,7 +36,8 @@ class MonitorJobConfigLoader implements Serializable{
 		if(this.properties == null){
 			this.properties = setDefault()
 		}
-		return this.properties;
+		def prop = this.properties.internalMap
+		return prop;
 	}
 	
 	/**
