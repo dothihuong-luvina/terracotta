@@ -34,6 +34,8 @@ function installDefault
     # Checkout Quartz from SVN and install if not exits
     . ./checkoutAndInstallQuartz.sh
     
+    cd $CUR_DIR
+    
     # Config data (using JobManager bundle)
     . ./configureWithJobManager.sh
     
